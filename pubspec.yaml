@@ -1,6 +1,6 @@
 name: otel_neon
 description: OpenTelemetry bridge for Neon (serverless Postgres) queries.
-version: 0.1.0-beta.2
+version: 0.1.0-beta.3-wip
 repository: https://github.com/dartastic/otel_neon
 homepage: https://dartastic.io
 publish_to: https://pub.dartastic.io
