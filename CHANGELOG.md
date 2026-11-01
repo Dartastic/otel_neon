@@ -1,9 +1,14 @@
 # Changelog
 
-## [0.1.0-beta.3-wip]
+All notable changes to this project will be documented in this file.
 
-## [0.1.0-beta.2] - 2026-06-10
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.0-beta.1] - 2026-06-03
+## [0.1.0-wip]
 
-- Initial release.
+### Added
+
+- First open-source release on pub.dev. Depends on
+  `dartastic_opentelemetry_api >=1.0.0-rc.4 <1.0.0-rc.5` only; the application chooses and
+  initializes the OpenTelemetry SDK.
