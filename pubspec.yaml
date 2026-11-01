@@ -2,7 +2,7 @@ name: otel_neon
 description: >-
   OpenTelemetry instrumentation for neon by Dartastic.io. Adds standard
   OpenTelemetry observability to applications that use neon.
-version: 0.1.0-wip
+version: 0.1.0
 repository: https://github.com/dartastic/otel_neon
 homepage: https://dartastic.io
 
