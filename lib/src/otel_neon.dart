@@ -1,17 +1,20 @@
-// Licensed under the Dartastic Pro Software License Agreement.
+// Licensed under the Apache License, Version 2.0
 // Copyright 2025-2026 Mindful Software LLC d/b/a Dartastic.io, All rights reserved.
 
-import 'package:dartastic_opentelemetry/dartastic_opentelemetry.dart';
+import 'package:dartastic_opentelemetry_api/dartastic_opentelemetry_api.dart';
 
 import 'otel_neon_suppression.dart';
 
 const _tracerName = 'dartastic_otel_libs_neon';
 
-Tracer _tracer() => OTel.tracerProvider().getTracer(_tracerName);
+APITracer _tracer() => OTelAPI.tracerProvider().getTracer(_tracerName);
 
 /// Pair returned from `tracedNeonQuery` callback.
 class NeonQueryResult<T> {
+  /// Creates a result.
   const NeonQueryResult({required this.value, this.rowCount, this.command});
+
+  /// The value returned to the caller.
   final T value;
   final int? rowCount;
 
@@ -54,23 +57,23 @@ Future<T> tracedNeonQuery<T>({
   final span = _tracer().startSpan(
     spanName,
     kind: SpanKind.client,
-    attributes: OTel.attributesFromMap(m),
+    attributes: OTelAPI.attributesFromMap(m),
   );
   try {
     final r = await invoke();
     final extras = <Attribute<Object>>[];
     if (r.rowCount != null) {
-      extras.add(OTel.attributeInt('db.row_count', r.rowCount!));
+      extras.add(OTelAPI.attributeInt('db.row_count', r.rowCount!));
     }
     if (r.command != null) {
-      extras.add(OTel.attributeString('postgresql.command', r.command!));
+      extras.add(OTelAPI.attributeString('postgresql.command', r.command!));
     }
-    if (extras.isNotEmpty) span.addAttributes(OTel.attributes(extras));
+    if (extras.isNotEmpty) span.addAttributes(OTelAPI.attributes(extras));
     return r.value;
   } catch (e, st) {
-    span.addAttributes(OTel.attributes([
-      OTel.attributeString(
-        ErrorResource.errorType.key,
+    span.addAttributes(OTelAPI.attributes([
+      OTelAPI.attributeString(
+        ErrorAttributes.errorType.key,
         e.runtimeType.toString(),
       ),
     ]));
